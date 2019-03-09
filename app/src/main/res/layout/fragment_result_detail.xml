@@ -1,0 +1,111 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="resultsViewModel"
+            type="com.ndanda.bigcommerce.viewmodel.ResultsViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+
+        <!-- GuideLines-->
+
+        <android.support.constraint.Guideline
+            android:id="@+id/toolbar_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/toolbar_guideline"
+            android:contentDescription="@string/back_button" />
+
+        <ImageButton
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/favorite_button"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/toolbar_guideline"
+            android:contentDescription="@string/favorite_button" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/event_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@{resultsViewModel.getSelectedEvent().getValue().getTitle()}"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/toolbar_guideline"
+            app:layout_constraintLeft_toRightOf="@id/back_button"
+            app:layout_constraintRight_toLeftOf="@id/favorite"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/event_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_guideline"
+            app:cardCornerRadius="8dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image="@{resultsViewModel.getSelectedEvent().getValue().getPerformers().get(0).getImage()}" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:date="@{resultsViewModel.getSelectedEvent().getValue().getDatetime_local()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/event_image" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/event_venue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:text="@{@string/location(resultsViewModel.getSelectedEvent().getValue().getVenue().getCity(),resultsViewModel.getSelectedEvent().getValue().getVenue().getState())}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/event_date"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
+
