@@ -41,9 +41,6 @@ public class ResultsViewModelTest {
     BigCommerceRepository bigCommerceRepository;
 
     @Mock
-    Observer<List<events>> resultsWithFavoritesObserver;
-
-    @Mock
     Observer<ApiResponse<SeatGeekEvent>> apiEventResultsObserver;
 
     @Mock
@@ -86,6 +83,13 @@ public class ResultsViewModelTest {
         when(bigCommerceRepository.getResults(anyString())).thenReturn(fakeApiResults);
     }
 
+    /**
+     *  1. Create an event.
+     *  2. Mark that as an selected event.
+     *  3. Call addEventToFavorite() on resultsViewModel class and
+     *  check if "saveFavoriteEvent()" method is called at-least once on
+     *  bigCommerceRepository class.
+     */
     @Test
     public void addEventToFavoriteTest() {
         // Check if saveFavorite() is called on bigCommerceRepository.
@@ -106,6 +110,13 @@ public class ResultsViewModelTest {
 
     }
 
+    /**
+     *  1. Create an event.
+     *  2. Mark that as an selected event.
+     *  3. Call removeEventFromFavorite() on resultsViewModel class and
+     *  check if "removeEventFromFavorite()" method is called at-least once on
+     *  bigCommerceRepository class.
+     */
     @Test
     public void removeEventFromFavoriteTest() {
 

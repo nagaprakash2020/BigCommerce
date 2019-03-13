@@ -29,6 +29,10 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
         this.resultsClickListener = resultsClickListener;
     }
 
+    /**
+     * Call this method to update the data in adapter.
+     * @param eventsList list of events to be displayed.
+     */
     public void setEventsList(List<events> eventsList){
         this.eventsList = eventsList;
         notifyDataSetChanged();
@@ -45,6 +49,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
     public void onBindViewHolder(@NonNull ResultsViewHolder holder, int position) {
         ResultsRowBinding resultsRowBinding = holder.resultsRowBinding;
 
+        // Set binding for the row.
         resultsRowBinding.setEvent(eventsList.get(position));
     }
 
@@ -69,6 +74,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
 
         @Override
         public void onClick(View v) {
+            // On event selected.
             resultsClickListener.onResultItemClicked(eventsList.get(getAdapterPosition()));
         }
     }

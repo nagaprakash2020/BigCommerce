@@ -17,24 +17,26 @@ import com.ndanda.bigcommerce.viewmodel.ResultsViewModel;
 
 import javax.inject.Inject;
 
-public class ResultDetailFragment extends Fragment implements View.OnClickListener {
+/**
+ * Fragment to show details of selected event.
+ */
+public class EventDetailFragment extends Fragment implements View.OnClickListener {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
-    private ResultsDetailFragmentListener mListener;
     private FragmentResultDetailBinding fragmentResultDetailBinding;
     ResultsViewModel resultsViewModel;
 
     public interface ResultsDetailFragmentListener {
     }
 
-    public ResultDetailFragment() {
+    public EventDetailFragment() {
         // Required empty public constructor
     }
 
-    public static ResultDetailFragment newInstance() {
-        return new ResultDetailFragment();
+    public static EventDetailFragment newInstance() {
+        return new EventDetailFragment();
     }
 
     @Override
@@ -50,7 +52,6 @@ public class ResultDetailFragment extends Fragment implements View.OnClickListen
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof ResultsDetailFragmentListener) {
-            mListener = (ResultsDetailFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement ResultsDetailFragmentListener");
@@ -79,6 +80,7 @@ public class ResultDetailFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
 
         switch (v.getId()) {
+            // Favorite button is enabled/disabled.
             case R.id.favorite:
                 if (!fragmentResultDetailBinding.favorite.isSelected()) {
                     fragmentResultDetailBinding.favorite.setSelected(true);

@@ -7,6 +7,10 @@ import android.view.inputmethod.InputMethodManager;
 
 public class UIUtils {
 
+    /**
+     * Utility method to hide soft keyboard
+     * @param activity
+     */
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputManager = (InputMethodManager) activity
                 .getSystemService(Context.INPUT_METHOD_SERVICE);

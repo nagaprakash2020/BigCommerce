@@ -7,6 +7,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Intercepts every call and adds authentication using query parameter.
+ */
 public class RetrofitApiKeyInterceptor implements Interceptor {
 
     @Override

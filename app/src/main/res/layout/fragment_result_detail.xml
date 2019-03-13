@@ -8,11 +8,10 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/result_details_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        android:layout_margin="6dp">
 
 
         <!-- GuideLines-->
@@ -20,7 +19,7 @@
         <android.support.constraint.Guideline
             android:id="@+id/toolbar_guideline"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintGuide_percent="0.1"
@@ -64,22 +63,15 @@
             app:layout_constraintRight_toLeftOf="@id/favorite"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <android.support.v7.widget.CardView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/event_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:url="@{resultsViewModel.getSelectedEvent().getValue().getPerformers().get(0).getImage()}"
+            app:radius="@{80}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_guideline"
-            app:cardCornerRadius="8dp">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:image="@{resultsViewModel.getSelectedEvent().getValue().getPerformers().get(0).getImage()}" />
-
-        </android.support.v7.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@id/toolbar_guideline" />
 
 
         <android.support.v7.widget.AppCompatTextView

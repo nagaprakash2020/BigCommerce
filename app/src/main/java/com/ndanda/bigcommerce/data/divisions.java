@@ -8,40 +8,51 @@ public class divisions {
     private int taxonomy_id;
     private String slug;
 
-    public String getDisplay_name(){
+    public String getDisplay_name() {
         return display_name;
     }
-    public void setDisplay_name(String input){
+
+    public void setDisplay_name(String input) {
         this.display_name = input;
     }
-    public String getShort_name(){
+
+    public String getShort_name() {
         return short_name;
     }
-    public void setShort_name(String input){
+
+    public void setShort_name(String input) {
         this.short_name = input;
     }
-    public int getDivision_level(){
+
+    public int getDivision_level() {
         return division_level;
     }
-    public void setDivision_level(int input){
+
+    public void setDivision_level(int input) {
         this.division_level = input;
     }
-    public String getDisplay_type(){
+
+    public String getDisplay_type() {
         return display_type;
     }
-    public void setDisplay_type(String input){
+
+    public void setDisplay_type(String input) {
         this.display_type = input;
     }
-    public int getTaxonomy_id(){
+
+    public int getTaxonomy_id() {
         return taxonomy_id;
     }
-    public void setTaxonomy_id(int input){
+
+    public void setTaxonomy_id(int input) {
         this.taxonomy_id = input;
     }
-    public String getSlug(){
+
+    public String getSlug() {
         return slug;
     }
-    public void setSlug(String input){
+
+    public void setSlug(String input) {
         this.slug = input;
     }
 }

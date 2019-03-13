@@ -17,13 +17,21 @@ import com.ndanda.bigcommerce.utils.AbsentLiveData;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ *  ResultsViewModel holds the data needed for {@link com.ndanda.bigcommerce.view.SearchFragment}
+ *  and {@link com.ndanda.bigcommerce.view.EventDetailFragment}
+ */
 public class ResultsViewModel extends ViewModel {
 
     private BigCommerceRepository repository;
+    // favoriteEvents will be used to populate the list of events on the UI.
     private LiveData<List<events>> favoriteEvents;
+    // Search Results from the SeatGeek response.
     private LiveData<ApiResponse<SeatGeekEvent>> searchResultEvents;
     private MediatorLiveData<List<events>> searchResultsWithFavorites = new MediatorLiveData<>();
+    // Search String entered by the user in search bar.
     private MutableLiveData<String> searchString = new MutableLiveData<>();
+    // Event selected by the user from the list of events displayed.
     private MutableLiveData<events> selectedEvent = new MutableLiveData<>();
 
     public ResultsViewModel(BigCommerceRepository repository) {
@@ -110,6 +118,9 @@ public class ResultsViewModel extends ViewModel {
         this.searchResultEvents = searchResultEvents;
     }
 
+    /**
+     * Method to update the database. Selected event will be inserted into database.
+     */
     public void addEventToFavorite() {
         if (selectedEvent != null && selectedEvent.getValue() != null) {
             events event = selectedEvent.getValue();
@@ -117,7 +128,9 @@ public class ResultsViewModel extends ViewModel {
             repository.saveFavoriteEvent(selectedEvent.getValue());
         }
     }
-
+    /**
+     * Method to update the database. Selected event will be deleted from database.
+     */
     public void removeEventFromFavorite() {
         if (selectedEvent != null && selectedEvent.getValue() != null) {
             events event = selectedEvent.getValue();

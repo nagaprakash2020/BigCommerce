@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,9 @@ public class SearchFragment extends Fragment implements ResultsAdapter.ResultsCl
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+
+    @Inject
+    CountingIdlingResource countingIdlingResource;
 
     private OnSearchFragmentInteractionListener mListener;
     FragmentSearchBinding fragmentSearchBinding;
@@ -79,7 +83,7 @@ public class SearchFragment extends Fragment implements ResultsAdapter.ResultsCl
         fragmentSearchBinding.searchResultsList.setLayoutManager(mLayoutManager);
         // ItemDecoration for each item in the list
         fragmentSearchBinding.searchResultsList.addItemDecoration(
-                new DividerItemDecoration(context,DividerItemDecoration.VERTICAL));
+                new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
 
         fragmentSearchBinding.searchResultsList.setAdapter(resultsAdapter);
         fragmentSearchBinding.searchBar.addTextChangedListener(new CustomTextChangeListener());
@@ -95,6 +99,7 @@ public class SearchFragment extends Fragment implements ResultsAdapter.ResultsCl
     @Override
     public void onPause() {
         super.onPause();
+        // Don't show keyboard in this fragment.
         if (getActivity() != null)
             UIUtils.hideKeyboard(getActivity());
     }
@@ -145,14 +150,28 @@ public class SearchFragment extends Fragment implements ResultsAdapter.ResultsCl
 
         }
 
+        /**
+         * Update the searchString in {@link ResultsViewModel}
+         *
+         * @param s
+         */
         @Override
         public void afterTextChanged(Editable s) {
 
             if (isAdded()) {
+                countingIdlingResource.increment();
                 resultsViewModel.setSearchString(s.toString());
 
+                // Listen to changes in SearchResultsWithFavorites from ViewModel
                 resultsViewModel.getSearchResultsWithFavorites().observe(SearchFragment.this,
-                        SearchFragment.this::updateSearchResults);
+                        events -> {
+                            updateSearchResults(events);
+                            try {
+                                countingIdlingResource.decrement();
+                            } catch (IllegalStateException e) {
+                                e.printStackTrace();
+                            }
+                        });
             }
 
         }

@@ -13,7 +13,10 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+    /**
+     * @param searchString entered by user
+     * @return
+     */
     @GET("events")
-    LiveData<ApiResponse<SeatGeekEvent>> getEvents(
-            @Query("q") String searchString);
+    LiveData<ApiResponse<SeatGeekEvent>> getEvents(@Query("q") String searchString);
 }

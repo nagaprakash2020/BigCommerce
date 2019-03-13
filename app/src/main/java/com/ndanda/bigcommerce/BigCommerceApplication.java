@@ -8,7 +8,7 @@ import com.ndanda.bigcommerce.di.ApplicationModule;
 import com.ndanda.bigcommerce.di.DaggerApplicationComponent;
 
 /**
- * Created by ndanda on 4/8/2018.
+ * Created by ndanda on 3/09/2019.
  */
 
 public class BigCommerceApplication extends Application{

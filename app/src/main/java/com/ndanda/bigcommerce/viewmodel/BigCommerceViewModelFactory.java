@@ -8,6 +8,9 @@ import com.ndanda.bigcommerce.repository.BigCommerceRepository;
 
 import javax.inject.Singleton;
 
+/**
+ * Factory class to construct ViewModels required for the application.
+ */
 @Singleton
 public class BigCommerceViewModelFactory implements ViewModelProvider.Factory {
 

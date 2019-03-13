@@ -16,11 +16,15 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
+    /**
+     * Sample test to verify package name is correct on the device after app installation.
+     */
     @Test
-    public void useAppContext() throws Exception {
+    public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.ndanda.bigCommerce", appContext.getPackageName());
+        assertEquals("com.ndanda.bigcommerce", appContext.getPackageName());
     }
 }

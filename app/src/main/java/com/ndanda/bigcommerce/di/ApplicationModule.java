@@ -3,6 +3,7 @@ package com.ndanda.bigcommerce.di;
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
+import android.support.test.espresso.idling.CountingIdlingResource;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,7 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by ndanda on 4/8/2018.
+ * Created by ndanda on 3/09/2019.
  */
 
 @Module
@@ -137,5 +138,11 @@ public class ApplicationModule {
     @Singleton
     ApiService provideApiService(Retrofit retrofit){
         return retrofit.create(ApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    CountingIdlingResource provideIdlingResource(){
+        return new CountingIdlingResource("NetworkCall");
     }
 }
