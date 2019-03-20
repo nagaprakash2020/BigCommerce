@@ -7,7 +7,6 @@ import android.support.test.espresso.idling.CountingIdlingResource;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ndanda.bigcommerce.AppExecutors;
 import com.ndanda.bigcommerce.BigCommerceApplication;
 import com.ndanda.bigcommerce.api.ApiService;
 import com.ndanda.bigcommerce.repository.BigCommerceRepository;
@@ -53,12 +52,6 @@ public class ApplicationModule {
         return new BigCommerceViewModelFactory(repository);
     }
 
-    @Provides
-    @Singleton
-    AppExecutors providesAppExecutors(){
-        return new AppExecutors();
-    }
-
 
     @Provides
     @Named("dataBase")
@@ -86,8 +79,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    BigCommerceRepository provideBigCommerceRepository(AppExecutors appExecutors, ApiService apiService, FavouriteDao favouriteDao){
-        return new BigCommerceRepository(appExecutors,apiService,favouriteDao);
+    BigCommerceRepository provideBigCommerceRepository(ApiService apiService, FavouriteDao favouriteDao){
+        return new BigCommerceRepository(apiService,favouriteDao);
     }
 
     @Provides
